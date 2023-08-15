@@ -1,0 +1,20 @@
+micronaut:
+  application:
+    name: rinhaBackend2023Q3
+
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/arena
+    username: dbaccess
+    password: pgsql
+    db-type: postgres
+    dialect: POSTGRES
+    driver-class-name: org.postgresql.Driver
+jpa:
+  default:
+    entity-scan:
+      packages: models
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update

@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.rinha.backend
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [app-name, data, data-jpa, http-client-test, java, java-application, jdbc-hikari, junit, logback, lombok, maven, maven-enforcer-plugin, micronaut-aot, netty-server, postgres, properties, readme, serialization-jackson, shade, test-resources]
