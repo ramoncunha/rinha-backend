@@ -13,8 +13,9 @@ datasources:
 jpa:
   default:
     entity-scan:
-      packages: models
+      packages: com.rinha.backend.infrastructure
     properties:
       hibernate:
         hbm2ddl:
-          auto: update
+          auto: create
+        show-sql: true
