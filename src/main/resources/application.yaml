@@ -1,6 +1,10 @@
 micronaut:
   application:
     name: rinhaBackend2023Q3
+  executors:
+    io:
+      type: fixed
+      nThreads: 10
 
 datasources:
   default:
