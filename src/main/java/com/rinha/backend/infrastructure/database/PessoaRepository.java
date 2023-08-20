@@ -1,4 +1,4 @@
-package com.rinha.backend.infrastructure;
+package com.rinha.backend.infrastructure.database;
 
 import io.micronaut.data.annotation.Repository;
 import io.micronaut.data.repository.CrudRepository;

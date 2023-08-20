@@ -1,4 +1,4 @@
-package com.rinha.backend.infrastructure;
+package com.rinha.backend.infrastructure.database;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

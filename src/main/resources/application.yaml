@@ -22,4 +22,8 @@ jpa:
       hibernate:
         hbm2ddl:
           auto: create
-        show-sql: true
+        format_sql: true
+        show_sql: true
+
+problem:
+  enabled: true
