@@ -29,7 +29,7 @@ public class PessoaService {
     public PessoaEntity findById(UUID id) {
         Optional<PessoaEntity> pessoaOptional = pessoaRepository.findById(id);
         if (pessoaOptional.isEmpty()) {
-            throw new PessoaNaoEncontradaException();
+            throw new PessoaNaoEncontradaException(id);
         }
         return pessoaOptional.get();
     }
