@@ -8,6 +8,7 @@ import org.zalando.problem.Problem;
 import java.net.URI;
 import java.util.UUID;
 
+@SuppressWarnings("java:S110")
 public class PessoaNaoEncontradaException extends HttpStatusException {
 
     public PessoaNaoEncontradaException(UUID id) {

@@ -20,8 +20,6 @@ jpa:
       packages: com.rinha.backend.infrastructure
     properties:
       hibernate:
-        hbm2ddl:
-          auto: create
         format_sql: true
         show_sql: true
 

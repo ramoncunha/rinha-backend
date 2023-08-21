@@ -27,5 +27,6 @@ public class PessoaEntity {
     private String nome;
     @Column(nullable = false)
     private LocalDate nascimento;
+    @Convert(converter = StringListConverter.class)
     private List<String> stack;
 }

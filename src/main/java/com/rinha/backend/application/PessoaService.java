@@ -1,12 +1,15 @@
 package com.rinha.backend.application;
 
+import com.rinha.backend.application.exception.ApelidoExistenteException;
 import com.rinha.backend.application.exception.PessoaNaoEncontradaException;
 import com.rinha.backend.application.presentation.PessoaRequest;
 import com.rinha.backend.infrastructure.database.PessoaEntity;
 import com.rinha.backend.infrastructure.database.PessoaRepository;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.exception.ConstraintViolationException;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -23,7 +26,11 @@ public class PessoaService {
                 .nascimento(pessoaRequest.getNascimento())
                 .stack(pessoaRequest.getStack())
                 .build();
-        return pessoaRepository.save(pessoaEntity);
+        try {
+            return pessoaRepository.save(pessoaEntity);
+        }  catch (ConstraintViolationException ex) {
+            throw new ApelidoExistenteException(pessoaEntity.getApelido());
+        }
     }
 
     public PessoaEntity findById(UUID id) {
@@ -32,5 +39,10 @@ public class PessoaService {
             throw new PessoaNaoEncontradaException(id);
         }
         return pessoaOptional.get();
+    }
+
+    public List<PessoaEntity> findByTerm(String term) {
+        pessoaRepository.findByTerm(term);
+        return null;
     }
 }

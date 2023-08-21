@@ -11,6 +11,7 @@ import io.micronaut.validation.Validated;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Validated
@@ -50,5 +51,11 @@ public class PessoaController {
                 .build();
 
         return HttpResponse.ok(response);
+    }
+
+    @Get("{?term}")
+    public HttpResponse<List<PessoaResponse>> findByTerm(@QueryValue String t) {
+        pessoaService.findByTerm(t);
+        return null;
     }
 }
