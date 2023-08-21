@@ -26,14 +26,7 @@ public class PessoaController {
     @Post
     public HttpResponse<PessoaResponse> create(@Body @Valid PessoaRequest pessoaRequest) {
         PessoaEntity pessoa = pessoaService.save(pessoaRequest);
-
-        PessoaResponse response = PessoaResponse.builder()
-                .id(pessoa.getId())
-                .apelido(pessoa.getApelido())
-                .nome(pessoa.getNome())
-                .dataNascimento(pessoa.getNascimento())
-                .stack(pessoa.getStack())
-                .build();
+        PessoaResponse response = pessoaResponseMapper.map(pessoa);
 
         return HttpResponse.status(HttpStatus.CREATED)
                 .header(HttpHeaders.LOCATION, "/pessoas/" + response.getId())
@@ -43,14 +36,7 @@ public class PessoaController {
     @Get("/{id}")
     public HttpResponse<PessoaResponse> findById(@PathVariable UUID id) {
         PessoaEntity pessoa = pessoaService.findById(id);
-
-        PessoaResponse response = PessoaResponse.builder()
-                .id(pessoa.getId())
-                .apelido(pessoa.getApelido())
-                .nome(pessoa.getNome())
-                .dataNascimento(pessoa.getNascimento())
-                .stack(pessoa.getStack())
-                .build();
+        PessoaResponse response = pessoaResponseMapper.map(pessoa);
 
         return HttpResponse.ok(response);
     }
@@ -58,6 +44,7 @@ public class PessoaController {
     @Get("{?term}")
     public HttpResponse<List<PessoaResponse>> findByTerm(@QueryValue String t) {
         List<PessoaEntity> pessoas = pessoaService.findByTerm(t);
+
         return HttpResponse.ok(pessoas.stream()
                 .map(pessoaResponseMapper::map)
                 .toList());
