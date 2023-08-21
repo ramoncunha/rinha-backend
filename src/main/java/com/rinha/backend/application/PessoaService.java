@@ -42,7 +42,6 @@ public class PessoaService {
     }
 
     public List<PessoaEntity> findByTerm(String term) {
-        pessoaRepository.findByTerm(term);
-        return null;
+        return pessoaRepository.findByTerm(term);
     }
 }

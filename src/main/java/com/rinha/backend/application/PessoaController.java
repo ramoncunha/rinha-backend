@@ -1,5 +1,6 @@
 package com.rinha.backend.application;
 
+import com.rinha.backend.application.mapper.PessoaResponseMapper;
 import com.rinha.backend.application.presentation.PessoaRequest;
 import com.rinha.backend.application.presentation.PessoaResponse;
 import com.rinha.backend.infrastructure.database.PessoaEntity;
@@ -20,6 +21,7 @@ import java.util.UUID;
 public class PessoaController {
 
     private final PessoaService pessoaService;
+    private final PessoaResponseMapper pessoaResponseMapper;
 
     @Post
     public HttpResponse<PessoaResponse> create(@Body @Valid PessoaRequest pessoaRequest) {
@@ -55,7 +57,9 @@ public class PessoaController {
 
     @Get("{?term}")
     public HttpResponse<List<PessoaResponse>> findByTerm(@QueryValue String t) {
-        pessoaService.findByTerm(t);
-        return null;
+        List<PessoaEntity> pessoas = pessoaService.findByTerm(t);
+        return HttpResponse.ok(pessoas.stream()
+                .map(pessoaResponseMapper::map)
+                .toList());
     }
 }

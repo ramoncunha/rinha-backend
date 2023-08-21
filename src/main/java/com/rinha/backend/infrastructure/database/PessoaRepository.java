@@ -10,6 +10,10 @@ import java.util.UUID;
 @Repository
 public interface PessoaRepository extends CrudRepository<PessoaEntity, UUID> {
 
-    @Query("FROM PessoaEntity p WHERE p.apelido LIKE :term OR p.nome LIKE :term OR p.stack LIKE :term")
+    @Query(value = "SELECT * FROM pessoas p WHERE " +
+            "LOWER(p.apelido) LIKE CONCAT(:term, '%') OR " +
+            "LOWER(p.nome) LIKE CONCAT(:term, '%') OR " +
+            "LOWER(p.stack) LIKE CONCAT(:term, '%')",
+            nativeQuery = true)
     List<PessoaEntity> findByTerm(String term);
 }
