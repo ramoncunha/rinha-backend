@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  database:
+    container_name: db-postgresql
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=arena
+      - POSTGRES_USER=dbaccess
+      - POSTGRES_PASSWORD=pgsql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d arena -U dbaccess" ]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+    restart: always
+    volumes:
+      - ./ddl.sql:/docker-entrypoint-initdb.d/ddl.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - arena-network
+
+networks:
+  arena-network:
+    driver: bridge

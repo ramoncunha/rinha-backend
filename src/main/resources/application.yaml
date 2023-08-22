@@ -8,9 +8,9 @@ micronaut:
 
 datasources:
   default:
-    url: jdbc:postgresql://localhost:5432/arena
-    username: dbaccess
-    password: pgsql
+    url: ${DATABASE_URL:`jdbc:postgresql://localhost:5432/arena`}
+    username: ${DATABASE_USER:dbaccess}
+    password: ${DATABASE_PASSWORD:pgsql}
     db-type: postgres
     dialect: POSTGRES
     driver-class-name: org.postgresql.Driver
