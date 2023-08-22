@@ -44,4 +44,8 @@ public class PessoaService {
     public List<PessoaEntity> findByTerm(String term) {
         return pessoaRepository.findByTerm(term);
     }
+
+    public String populacao() {
+        return pessoaRepository.countAllRows();
+    }
 }
