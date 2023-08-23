@@ -4,6 +4,7 @@ services:
   database:
     container_name: db-postgresql
     image: postgres:15-alpine
+    command: 'postgres -c max_connections=200 -c synchronous_commit=off'
     environment:
       - POSTGRES_DB=arena
       - POSTGRES_USER=dbaccess
@@ -28,8 +29,7 @@ services:
 
   api1:
     container_name: api1
-    build:
-      context: .
+    image: ramoncunha/rinha-api
     environment:
       - DATABASE_URL=jdbc:postgresql://db-postgresql:5432/arena
       - DATABASE_USER=dbaccess
@@ -47,8 +47,7 @@ services:
 
   api2:
     container_name: api2
-    build:
-      context: .
+    image: ramoncunha/rinha-api
     environment:
       - DATABASE_URL=jdbc:postgresql://db-postgresql:5432/arena
       - DATABASE_USER=dbaccess
