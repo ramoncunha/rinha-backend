@@ -1,4 +1,4 @@
-package com.rinha.backend.application;
+package com.rinha.backend.application.service;
 
 import com.rinha.backend.application.exception.ApelidoExistenteException;
 import com.rinha.backend.application.exception.PessoaNaoEncontradaException;

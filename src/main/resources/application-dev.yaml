@@ -1,0 +1,6 @@
+jpa:
+  default:
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true

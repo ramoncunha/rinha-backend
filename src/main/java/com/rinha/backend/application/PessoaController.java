@@ -3,6 +3,7 @@ package com.rinha.backend.application;
 import com.rinha.backend.application.mapper.PessoaResponseMapper;
 import com.rinha.backend.application.presentation.PessoaRequest;
 import com.rinha.backend.application.presentation.PessoaResponse;
+import com.rinha.backend.application.service.PessoaService;
 import com.rinha.backend.infrastructure.database.PessoaEntity;
 import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpResponse;

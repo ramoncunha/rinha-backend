@@ -18,10 +18,6 @@ jpa:
   default:
     entity-scan:
       packages: com.rinha.backend.infrastructure
-    properties:
-      hibernate:
-        format_sql: true
-        show_sql: true
 
 problem:
   enabled: true
