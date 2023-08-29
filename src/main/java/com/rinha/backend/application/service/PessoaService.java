@@ -20,7 +20,9 @@ public class PessoaService {
     private final PessoaRepository pessoaRepository;
 
     public PessoaEntity save(PessoaRequest pessoaRequest) {
+        UUID id = UUID.randomUUID();
         PessoaEntity pessoaEntity = PessoaEntity.builder()
+                .id(id)
                 .apelido(pessoaRequest.getApelido())
                 .nome(pessoaRequest.getNome())
                 .nascimento(pessoaRequest.getNascimento())
