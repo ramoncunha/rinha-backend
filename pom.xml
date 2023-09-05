@@ -22,6 +22,8 @@
     <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
     <micronaut.runtime>netty</micronaut.runtime>
     <exec.mainClass>com.rinha.backend.Application</exec.mainClass>
+    <postgresql.version>42.6.0</postgresql.version>
+    <jooq.version>3.18.6</jooq.version>
   </properties>
 
   <repositories>
@@ -38,18 +40,8 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>io.micronaut.data</groupId>
-      <artifactId>micronaut-data-hibernate-jpa</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>io.micronaut.serde</groupId>
       <artifactId>micronaut-serde-jackson</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut.sql</groupId>
-      <artifactId>micronaut-jdbc-hikari</artifactId>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -58,9 +50,35 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
+      <groupId>io.micronaut.sql</groupId>
+      <artifactId>micronaut-jooq</artifactId>
+      <version>2.3.7</version>
+    </dependency>
+    <dependency>
+      <groupId>io.micronaut.sql</groupId>
+      <artifactId>micronaut-jdbc-hikari</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
+      <version>${postgresql.version}</version>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jooq</groupId>
+      <artifactId>jooq</artifactId>
+      <version>${jooq.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jooq</groupId>
+      <artifactId>jooq-meta</artifactId>
+      <version>${jooq.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jooq</groupId>
+      <artifactId>jooq-codegen</artifactId>
+      <version>${jooq.version}</version>
     </dependency>
     <dependency>
       <groupId>io.micronaut.validation</groupId>
@@ -122,6 +140,44 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.jooq</groupId>
+        <artifactId>jooq-codegen-maven</artifactId>
+        <version>3.18.6</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <jdbc>
+            <driver>org.postgresql.Driver</driver>
+            <url>jdbc:postgresql://localhost:5432/arena</url>
+            <user>dbaccess</user>
+            <password>pgsql</password>
+          </jdbc>
+        <generator>
+          <database>
+            <name>org.jooq.meta.postgres.PostgresDatabase</name>
+            <includes>.*</includes>
+            <inputSchema>public</inputSchema>
+          </database>
+          <target>
+            <packageName>com.rinha.backend.infrastructure.database</packageName>
+            <directory>target/generated-sources/jooq</directory>
+          </target>
+        </generator>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

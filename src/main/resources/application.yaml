@@ -1,10 +1,6 @@
 micronaut:
   application:
     name: rinhaBackend2023Q3
-  executors:
-    io:
-      type: fixed
-      nThreads: 10
 
 datasources:
   default:
@@ -12,7 +8,7 @@ datasources:
     username: ${DATABASE_USER:dbaccess}
     password: ${DATABASE_PASSWORD:pgsql}
     db-type: postgres
-    dialect: POSTGRES
+    sql-dialect: POSTGRES
     driver-class-name: org.postgresql.Driver
 jpa:
   default:

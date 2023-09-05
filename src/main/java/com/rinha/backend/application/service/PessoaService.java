@@ -6,8 +6,8 @@ import com.rinha.backend.application.presentation.PessoaRequest;
 import com.rinha.backend.infrastructure.database.PessoaEntity;
 import com.rinha.backend.infrastructure.database.PessoaRepository;
 import jakarta.inject.Singleton;
+import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.List;
 import java.util.Optional;
