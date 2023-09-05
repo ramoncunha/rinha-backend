@@ -4,7 +4,7 @@ import com.rinha.backend.application.mapper.PessoaResponseMapper;
 import com.rinha.backend.application.presentation.PessoaRequest;
 import com.rinha.backend.application.presentation.PessoaResponse;
 import com.rinha.backend.application.service.PessoaService;
-import com.rinha.backend.infrastructure.database.PessoaEntity;
+import com.rinha.backend.infrastructure.database.model.tables.records.PessoasRecord;
 import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
@@ -26,7 +26,7 @@ public class PessoaController {
 
     @Post
     public HttpResponse<PessoaResponse> create(@Body @Valid PessoaRequest pessoaRequest) {
-        PessoaEntity pessoa = pessoaService.save(pessoaRequest);
+        PessoasRecord pessoa = pessoaService.save(pessoaRequest);
         PessoaResponse response = pessoaResponseMapper.map(pessoa);
 
         return HttpResponse.status(HttpStatus.CREATED)
@@ -36,7 +36,7 @@ public class PessoaController {
 
     @Get("/{id}")
     public HttpResponse<PessoaResponse> findById(@PathVariable UUID id) {
-        PessoaEntity pessoa = pessoaService.findById(id);
+        PessoasRecord pessoa = pessoaService.findById(id);
         PessoaResponse response = pessoaResponseMapper.map(pessoa);
 
         return HttpResponse.ok(response);
@@ -44,7 +44,7 @@ public class PessoaController {
 
     @Get("{?term}")
     public HttpResponse<List<PessoaResponse>> findByTerm(@QueryValue String t) {
-        List<PessoaEntity> pessoas = pessoaService.findByTerm(t);
+        List<PessoasRecord> pessoas = pessoaService.findByTerm(t);
 
         return HttpResponse.ok(pessoas.stream()
                 .map(pessoaResponseMapper::map)

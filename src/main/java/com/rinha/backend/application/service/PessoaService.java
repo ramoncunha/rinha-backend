@@ -3,11 +3,11 @@ package com.rinha.backend.application.service;
 import com.rinha.backend.application.exception.ApelidoExistenteException;
 import com.rinha.backend.application.exception.PessoaNaoEncontradaException;
 import com.rinha.backend.application.presentation.PessoaRequest;
-import com.rinha.backend.infrastructure.database.PessoaEntity;
 import com.rinha.backend.infrastructure.database.PessoaRepository;
+import com.rinha.backend.infrastructure.database.model.tables.records.PessoasRecord;
 import jakarta.inject.Singleton;
-import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
+import org.jooq.exception.IntegrityConstraintViolationException;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,31 +19,23 @@ public class PessoaService {
 
     private final PessoaRepository pessoaRepository;
 
-    public PessoaEntity save(PessoaRequest pessoaRequest) {
-        UUID id = UUID.randomUUID();
-        PessoaEntity pessoaEntity = PessoaEntity.builder()
-                .id(id)
-                .apelido(pessoaRequest.getApelido())
-                .nome(pessoaRequest.getNome())
-                .nascimento(pessoaRequest.getNascimento())
-                .stack(pessoaRequest.getStack())
-                .build();
+    public PessoasRecord save(PessoaRequest pessoaRequest) {
         try {
-            return pessoaRepository.save(pessoaEntity);
-        }  catch (ConstraintViolationException ex) {
-            throw new ApelidoExistenteException(pessoaEntity.getApelido());
+            return pessoaRepository.save(pessoaRequest);
+        }  catch (IntegrityConstraintViolationException ex) {
+            throw new ApelidoExistenteException(pessoaRequest.getApelido());
         }
     }
 
-    public PessoaEntity findById(UUID id) {
-        Optional<PessoaEntity> pessoaOptional = pessoaRepository.findById(id);
+    public PessoasRecord findById(UUID id) {
+        Optional<PessoasRecord> pessoaOptional = pessoaRepository.findById(id);
         if (pessoaOptional.isEmpty()) {
             throw new PessoaNaoEncontradaException(id);
         }
         return pessoaOptional.get();
     }
 
-    public List<PessoaEntity> findByTerm(String term) {
+    public List<PessoasRecord> findByTerm(String term) {
         return pessoaRepository.findByTerm(term);
     }
 
