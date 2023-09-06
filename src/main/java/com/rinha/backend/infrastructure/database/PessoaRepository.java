@@ -72,8 +72,7 @@ public class PessoaRepository {
     }
 
     public Optional<PessoasRecord> findById(UUID id) {
-        PessoasRecord pessoaRecord = dslContext
-                .fetchOne(PESSOAS, PESSOAS.ID.eq(id));
+        PessoasRecord pessoaRecord = dslContext.fetchOne(PESSOAS, PESSOAS.ID.eq(id));
         return pessoaRecord == null ? Optional.empty() : Optional.of(pessoaRecord);
     }
 

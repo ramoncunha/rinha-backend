@@ -30,6 +30,7 @@ services:
   api1:
     container_name: api1
     image: ramoncunha/rinha-api
+#    entrypoint: ["/app/rinha-api"]
     environment:
       - DATABASE_URL=jdbc:postgresql://db-postgresql:5432/arena
       - DATABASE_USER=dbaccess
@@ -48,6 +49,7 @@ services:
   api2:
     container_name: api2
     image: ramoncunha/rinha-api
+#    entrypoint: ["/app/rinha-api"]
     environment:
       - DATABASE_URL=jdbc:postgresql://db-postgresql:5432/arena
       - DATABASE_USER=dbaccess

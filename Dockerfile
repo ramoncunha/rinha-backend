@@ -3,7 +3,7 @@ FROM eclipse-temurin:17-jdk-jammy AS build
 WORKDIR /app
 COPY . /app
 RUN ["chmod", "+x", "mvnw"]
-RUN ["./mvnw", "-Dmaven.test.skip", "install"]
+RUN ["./mvnw", "-Dmaven.test.skip", "package"]
 
 FROM eclipse-temurin:17-jdk-jammy AS dev
 

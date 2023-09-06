@@ -1,0 +1,24 @@
+FROM ubuntu AS build
+
+WORKDIR /app
+COPY . /app
+RUN chmod +x mvnw
+
+RUN apt-get update && \
+    apt-get -qq -y install curl \
+    gcc \
+    wget \
+    unzip \
+    zlib1g-dev \
+    zip
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+RUN curl -s "https://get.sdkman.io" | bash
+RUN source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk install java 17.0.8-graal
+
+RUN source "$HOME/.sdkman/bin/sdkman-init.sh" && ./mvnw -Dmaven.test.skip -Dpackaging=native-image --report-unsupported-elements-at-runtime package
+
+FROM alpine AS dev
+
+WORKDIR /app
+COPY --from=build /app/target/rinha-backend-2023-q3 /app/rinha-api
+EXPOSE 8080
