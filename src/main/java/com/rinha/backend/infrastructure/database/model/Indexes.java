@@ -22,6 +22,5 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index IDX_PESSOAS_APELIDO = Internal.createIndex(DSL.name("idx_pessoas_apelido"), Pessoas.PESSOAS, new OrderField[] { Pessoas.PESSOAS.APELIDO }, false);
-    public static final Index IDX_PESSOAS_NOME = Internal.createIndex(DSL.name("idx_pessoas_nome"), Pessoas.PESSOAS, new OrderField[] { Pessoas.PESSOAS.NOME }, false);
+    public static final Index IDX_SEARCH_TERM = Internal.createIndex(DSL.name("idx_search_term"), Pessoas.PESSOAS, new OrderField[] { Pessoas.PESSOAS.SEARCH_TERM }, false);
 }

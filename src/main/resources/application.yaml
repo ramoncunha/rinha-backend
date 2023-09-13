@@ -3,12 +3,13 @@ micronaut:
     name: rinhaBackend2023Q3
 
 datasources:
-  default:
+  hikari:
     url: ${DATABASE_URL:`jdbc:postgresql://localhost:5432/arena`}
     username: ${DATABASE_USER:dbaccess}
     password: ${DATABASE_PASSWORD:pgsql}
     db-type: postgres
     sql-dialect: POSTGRES
+    maximum-pool-size: 75
     driver-class-name: org.postgresql.Driver
 jpa:
   default:

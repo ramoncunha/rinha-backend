@@ -24,9 +24,7 @@ public class PessoaRepository {
     public List<PessoasRecord> findByTerm(String term) {
         Result<Record> records = dslContext.select()
                 .from(PESSOAS)
-                .where(PESSOAS.APELIDO.likeIgnoreCase("%" + term + "%"))
-                .or(PESSOAS.NOME.likeIgnoreCase("%" + term + "%"))
-                .or(PESSOAS.STACK.likeIgnoreCase("%" + term + "%"))
+                .where(PESSOAS.SEARCH_TERM.likeIgnoreCase("%" + term + "%"))
                 .limit(50)
                 .fetch();
 
@@ -65,6 +63,11 @@ public class PessoaRepository {
 
         String stack = convertToDatabaseColumn(pessoaRequest.getStack());
         pessoaRecord.setStack(stack);
+
+        String searchTerm = pessoaRequest.getApelido()
+                + ";" + pessoaRequest.getNome()
+                + ";" + stack;
+        pessoaRecord.setSearchTerm(searchTerm);
 
         dslContext.insertInto(PESSOAS).set(pessoaRecord).execute();
 

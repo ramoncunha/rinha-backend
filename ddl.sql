@@ -19,12 +19,12 @@ CREATE TABLE public.pessoas (
     nascimento date not null,
     nome varchar(100) not null,
     stack varchar(255),
+    search_term varchar(255),
     primary key (id)
 );
 
 CREATE EXTENSION IF NOT EXISTS pg_trgm SCHEMA pg_catalog;
 
-CREATE INDEX idx_pessoas_apelido ON public.pessoas USING gin("apelido" gin_trgm_ops);
-CREATE INDEX idx_pessoas_nome ON public.pessoas USING gin("nome" gin_trgm_ops);
+CREATE INDEX idx_search_term ON public.pessoas USING gin("search_term" gin_trgm_ops);
 
 ALTER TABLE PUBLIC.pessoas OWNER TO dbaccess;
