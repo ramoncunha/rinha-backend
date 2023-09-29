@@ -30,9 +30,9 @@ services:
 
   api1:
     container_name: api1
-    build:
-      context: .
-#    image: ramoncunha/rinha-api
+#    build:
+#      context: .
+    image: ramoncunha/rinha-api
 #   entrypoint: ["/app/rinha-api"]
     environment:
       - DATABASE_URL=jdbc:postgresql://db-postgresql:5432/arena
@@ -51,9 +51,9 @@ services:
 
   api2:
     container_name: api2
-    build:
-      context: .
-#    image: ramoncunha/rinha-api
+#    build:
+#      context: .
+    image: ramoncunha/rinha-api
 #    entrypoint: ["/app/rinha-api"]
     environment:
       - DATABASE_URL=jdbc:postgresql://db-postgresql:5432/arena
