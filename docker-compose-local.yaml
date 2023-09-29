@@ -4,6 +4,7 @@ services:
   database:
     container_name: db-postgresql
     image: postgres:15-alpine
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
     environment:
       - POSTGRES_DB=arena
       - POSTGRES_USER=dbaccess
@@ -16,6 +17,7 @@ services:
     restart: always
     volumes:
       - ./ddl.sql:/docker-entrypoint-initdb.d/ddl.sql
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
     ports:
       - "5432:5432"
     networks:

@@ -1,6 +1,8 @@
 micronaut:
   application:
     name: rinhaBackend2023Q3
+  server:
+    port: ${SERVER_PORT:8080}
 
 datasources:
   hikari:
@@ -9,7 +11,7 @@ datasources:
     password: ${DATABASE_PASSWORD:pgsql}
     db-type: postgres
     sql-dialect: POSTGRES
-    maximum-pool-size: 75
+    maximum-pool-size: 150
     driver-class-name: org.postgresql.Driver
 jpa:
   default:
